@@ -32,6 +32,43 @@ public interface ApeEntity {
     Box boundingBox();
 
     /**
+     * Returns the vector that
+     * describes the collection
+     * of forces currently affecting
+     * this entity.
+     * <p>Forces can be added using
+     * vector math operations.
+     *
+     * @return the sum of all forces currently affecting this entity
+     */
+    StateChangingVec2d force();
+
+    /**
+     * Returns the sum of all velocities
+     * that this entity is currently
+     * affected by as a vector.
+     * <p>Movement can be added using
+     * vector math operations.
+     *
+     * @return the sum of all velocities affecting this entity
+     */
+    StateChangingVec2d velocity();
+
+    /**
+     * Returns the mass of this entity.
+     *
+     * @return the mass of this entity
+     */
+    double mass();
+
+    /**
+     * Sets the mass of this entity.
+     *
+     * @param mass the new mass of this entity
+     */
+    void setMass(final double mass);
+
+    /**
      * Returns true if this
      * entity and the given {@link Box box}
      * intersect ("collide").

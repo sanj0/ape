@@ -44,7 +44,26 @@ public class Box {
      * @param h the desired height of the box
      */
     public Box(final ApeVec2d pos, final double w, final double h) {
-        this(pos, pos.subtract(new ApeVec2d(w, -h)));
+        this(pos, pos.add(new ApeVec2d(w, h)));
+    }
+
+    /**
+     * Returns true if this box
+     * intersects with the given box.
+     *
+     * @param b another box
+     * @return true if this box and the given one intersect
+     */
+    public boolean intersects(final Box b) {
+        // not optimised base code:
+        /*
+        if(max.x < b.min.x or min.x > b.max.x) return false
+        if(max.y < b.min.y or min.y > b.max.y) return false
+        return true
+         */
+        if (max.x < b.min.x || min.x > b.max.x)
+            return false;
+        return (max.y >= b.min.y) && (min.y <= b.max.y);
     }
 
     /**
@@ -77,12 +96,12 @@ public class Box {
      * Calculates and returns the width
      * of this box.
      * <p>
-     * <code>w = min.x - max.x</code>
+     * <code>w = max.x - min.x</code>
      *
      * @return the computed width of this box
      */
     public double width() {
-        return min.getX() - max.getX();
+        return max.getX() - min.getX();
     }
 
     /**
@@ -105,7 +124,7 @@ public class Box {
      * of said methods, the applied formula
      * is as follows:
      * <p>
-     * <code>a = (min.x - max.x) * (max.y - min.y)</code>
+     * <code>a = (max.x - min.x) * (max.y - min.y)</code>
      *
      * @return the computed area of this box
      */

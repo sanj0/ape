@@ -13,8 +13,8 @@ import java.util.Objects;
 //TODO(sanj0): WRITE TESTS
 public class ApeVec2d {
 
-    private double x;
-    private double y;
+    protected double x;
+    protected double y;
 
     public ApeVec2d(final double x, final double y) {
         this.x = x;

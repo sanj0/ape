@@ -1,5 +1,7 @@
 package de.sanj0.ape;
 
+import java.util.Objects;
+
 /**
  * A two-dimensional vector.
  * All calculation methods are
@@ -8,6 +10,7 @@ package de.sanj0.ape;
  * return a new one as the result
  * of the calculation.
  */
+//TODO(sanj0): WRITE TESTS
 public class ApeVec2d {
 
     private double x;
@@ -56,8 +59,8 @@ public class ApeVec2d {
      * @return the unit vector of this vector
      */
     public ApeVec2d unit() {
-        final double magSquared = magSquared();
-        return new ApeVec2d(x * x / magSquared, y * y / magSquared);
+        final double mag = mag();
+        return new ApeVec2d(x / mag, y / mag);
     }
 
     /**
@@ -70,7 +73,7 @@ public class ApeVec2d {
      * vector but with the given magnitude
      */
     public ApeVec2d withMag(final double mag) {
-        final double factor = (mag * mag) / magSquared();
+        final double factor = mag / mag();
         return new ApeVec2d(x * factor, y * factor);
     }
 
@@ -96,6 +99,27 @@ public class ApeVec2d {
      */
     public double mag() {
         return Math.sqrt(magSquared());
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final ApeVec2d apeVec2d = (ApeVec2d) o;
+        return Double.compare(apeVec2d.x, x) == 0 && Double.compare(apeVec2d.y, y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "ApeVec2d{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 
     /**

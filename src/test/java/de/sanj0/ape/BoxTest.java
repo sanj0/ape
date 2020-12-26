@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoxTest {
 
-    private final static Box ex = new Box(new ApeVec2d(3, 1), 2, 2);
+    private final static Box ex = new Box(new ApeVec2d(1, 3), 2, 2);
 
     @Test
     void testExampleBox() {
-        assertEquals(new ApeVec2d(1, 3), ex.getMax());
+        assertEquals(new ApeVec2d(3, 5), ex.getMax());
     }
     @Test
     void width() {
@@ -25,5 +25,12 @@ class BoxTest {
     @Test
     void area() {
         assertEquals(4, ex.area());
+    }
+
+    @Test
+    void intersects() {
+        assertTrue(ex.intersects(ex));
+        assertTrue(ex.intersects(new Box(new ApeVec2d(2, 2), 3, 2)));
+        assertFalse(ex.intersects(new Box(new ApeVec2d(1, 1), 1, 1)));
     }
 }
